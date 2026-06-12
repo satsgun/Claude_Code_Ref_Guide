@@ -159,3 +159,18 @@ For structured, multi-assignment projects (e.g., a CLI tool → API/web app → 
 - Treat CI (lint + test across versions) as a hook-enforced or CLAUDE.md-documented expectation, written early, not bolted on.
 - For new assignments with architectural decisions still open (e.g., frontend stack choice), use plan mode and the interview pattern to produce a `SPEC.md` before coding — this spec itself becomes a useful artifact for showing design thinking.
 - Use subagent-based review on completed assignments before considering them "done" — catches gaps a self-review misses.
+
+## 7. AskUserQuestion Tool
+
+Just ask Claude Code to use the tool explicitly:
+
+`I want to build [brief description]. Interview me in detail using the AskUserQuestion tool.
+Ask about technical implementation, UI/UX, edge cases, concerns, and tradeoffs. Don't ask obvious questions, dig into the hard parts I might not have considered.
+Keep interviewing until we've covered everything, then write a complete spec to SPEC.md`.
+
+### Notes
+
+- The phrase "using the AskUserQuestion tool" is the actual trigger — without it Claude may just ask questions in plain text or make assumptions and proceed.
+- It works best at the start of a fresh session, before any code has been written, so Claude isn't anchored to an existing implementation.
+- You can scope what it asks about ("focus on data model and API contract, skip UI questions") if you don't want it wandering into areas you've already decided.
+- Once the interview produces `SPEC.md`, start a new session to implement — keeps the implementation context clean and focused on the spec rather than the back-and-forth that produced it.
